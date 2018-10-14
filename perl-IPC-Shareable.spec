@@ -4,15 +4,15 @@
 #
 Name     : perl-IPC-Shareable
 Version  : 0.61
-Release  : 1
+Release  : 2
 URL      : https://cpan.metacpan.org/authors/id/M/MS/MSOUTH/IPC-Shareable-0.61.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/M/MS/MSOUTH/IPC-Shareable-0.61.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libi/libipc-shareable-perl/libipc-shareable-perl_0.61-2.debian.tar.xz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0
-Requires: perl-IPC-Shareable-license
-Requires: perl-IPC-Shareable-man
+Requires: perl-IPC-Shareable-license = %{version}-%{release}
+BuildRequires : buildreq-cpan
 
 %description
 ----------------------------------------------------------------------
@@ -29,6 +29,15 @@ along with this software. If not, write to the Free Software
 Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 ----------------------------------------------------------------------
 
+%package dev
+Summary: dev components for the perl-IPC-Shareable package.
+Group: Development
+Provides: perl-IPC-Shareable-devel = %{version}-%{release}
+
+%description dev
+dev components for the perl-IPC-Shareable package.
+
+
 %package license
 Summary: license components for the perl-IPC-Shareable package.
 Group: Default
@@ -37,19 +46,11 @@ Group: Default
 license components for the perl-IPC-Shareable package.
 
 
-%package man
-Summary: man components for the perl-IPC-Shareable package.
-Group: Default
-
-%description man
-man components for the perl-IPC-Shareable package.
-
-
 %prep
-tar -xf %{SOURCE1}
-cd ..
 %setup -q -n IPC-Shareable-0.61
-mkdir -p %{_topdir}/BUILD/IPC-Shareable-0.61/deblicense/
+cd ..
+%setup -q -T -D -n IPC-Shareable-0.61 -b 1
+mkdir -p deblicense/
 mv %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/IPC-Shareable-0.61/deblicense/
 
 %build
@@ -74,12 +75,13 @@ make TEST_VERBOSE=1 test
 
 %install
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/perl-IPC-Shareable
-cp COPYING %{buildroot}/usr/share/doc/perl-IPC-Shareable/COPYING
+mkdir -p %{buildroot}/usr/share/package-licenses/perl-IPC-Shareable
+cp COPYING %{buildroot}/usr/share/package-licenses/perl-IPC-Shareable/COPYING
+cp deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-IPC-Shareable/deblicense_copyright
 if test -f Makefile.PL; then
-make pure_install PERL_INSTALL_ROOT=%{buildroot}
+make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
-./Build install --installdirs=site --destdir=%{buildroot}
+./Build install --installdirs=vendor --destdir=%{buildroot}
 fi
 find %{buildroot} -type f -name .packlist -exec rm -f {} ';'
 find %{buildroot} -depth -type d -exec rmdir {} 2>/dev/null ';'
@@ -88,14 +90,15 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.1/IPC/Shareable.pm
-/usr/lib/perl5/site_perl/5.26.1/IPC/Shareable/SharedMem.pm
+/usr/lib/perl5/vendor_perl/5.26.1/IPC/Shareable.pm
+/usr/lib/perl5/vendor_perl/5.26.1/IPC/Shareable/SharedMem.pm
 
-%files license
-%defattr(-,root,root,-)
-/usr/share/doc/perl-IPC-Shareable/COPYING
-
-%files man
+%files dev
 %defattr(-,root,root,-)
 /usr/share/man/man3/IPC::Shareable.3
 /usr/share/man/man3/IPC::Shareable::SharedMem.3
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/perl-IPC-Shareable/COPYING
+/usr/share/package-licenses/perl-IPC-Shareable/deblicense_copyright
