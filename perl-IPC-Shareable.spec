@@ -4,7 +4,7 @@
 #
 Name     : perl-IPC-Shareable
 Version  : 0.61
-Release  : 4
+Release  : 5
 URL      : https://cpan.metacpan.org/authors/id/M/MS/MSOUTH/IPC-Shareable-0.61.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/M/MS/MSOUTH/IPC-Shareable-0.61.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libi/libipc-shareable-perl/libipc-shareable-perl_0.61-2.debian.tar.xz
