@@ -4,11 +4,11 @@
 #
 Name     : perl-IPC-Shareable
 Version  : 0.61
-Release  : 10
+Release  : 11
 URL      : https://cpan.metacpan.org/authors/id/M/MS/MSOUTH/IPC-Shareable-0.61.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/M/MS/MSOUTH/IPC-Shareable-0.61.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libi/libipc-shareable-perl/libipc-shareable-perl_0.61-2.debian.tar.xz
-Summary  : No detailed summary available
+Summary  : Perl/CPAN Module IPC::Shareable : Tie a variable to shared memory
 Group    : Development/Tools
 License  : GPL-2.0
 Requires: perl-IPC-Shareable-license = %{version}-%{release}
@@ -33,6 +33,7 @@ Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 Summary: dev components for the perl-IPC-Shareable package.
 Group: Development
 Provides: perl-IPC-Shareable-devel = %{version}-%{release}
+Requires: perl-IPC-Shareable = %{version}-%{release}
 
 %description dev
 dev components for the perl-IPC-Shareable package.
@@ -51,7 +52,7 @@ license components for the perl-IPC-Shareable package.
 cd ..
 %setup -q -T -D -n IPC-Shareable-0.61 -b 1
 mkdir -p deblicense/
-mv %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/IPC-Shareable-0.61/deblicense/
+cp -r %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/IPC-Shareable-0.61/deblicense/
 
 %build
 export http_proxy=http://127.0.0.1:9/
