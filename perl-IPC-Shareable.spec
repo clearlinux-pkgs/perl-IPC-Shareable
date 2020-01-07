@@ -4,14 +4,15 @@
 #
 Name     : perl-IPC-Shareable
 Version  : 0.61
-Release  : 11
+Release  : 12
 URL      : https://cpan.metacpan.org/authors/id/M/MS/MSOUTH/IPC-Shareable-0.61.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/M/MS/MSOUTH/IPC-Shareable-0.61.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libi/libipc-shareable-perl/libipc-shareable-perl_0.61-2.debian.tar.xz
-Summary  : Perl/CPAN Module IPC::Shareable : Tie a variable to shared memory
+Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0
 Requires: perl-IPC-Shareable-license = %{version}-%{release}
+Requires: perl-IPC-Shareable-perl = %{version}-%{release}
 BuildRequires : buildreq-cpan
 
 %description
@@ -47,18 +48,28 @@ Group: Default
 license components for the perl-IPC-Shareable package.
 
 
+%package perl
+Summary: perl components for the perl-IPC-Shareable package.
+Group: Default
+Requires: perl-IPC-Shareable = %{version}-%{release}
+
+%description perl
+perl components for the perl-IPC-Shareable package.
+
+
 %prep
 %setup -q -n IPC-Shareable-0.61
-cd ..
-%setup -q -T -D -n IPC-Shareable-0.61 -b 1
+cd %{_builddir}
+tar xf %{_sourcedir}/libipc-shareable-perl_0.61-2.debian.tar.xz
+cd %{_builddir}/IPC-Shareable-0.61
 mkdir -p deblicense/
-cp -r %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/IPC-Shareable-0.61/deblicense/
+cp -r %{_builddir}/debian/* %{_builddir}/IPC-Shareable-0.61/deblicense/
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
+export LANG=C.UTF-8
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
 make  %{?_smp_mflags}
@@ -68,7 +79,7 @@ else
 fi
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
@@ -77,8 +88,8 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-IPC-Shareable
-cp COPYING %{buildroot}/usr/share/package-licenses/perl-IPC-Shareable/COPYING
-cp deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-IPC-Shareable/deblicense_copyright
+cp %{_builddir}/IPC-Shareable-0.61/COPYING %{buildroot}/usr/share/package-licenses/perl-IPC-Shareable/075d599585584bb0e4b526f5c40cb6b17e0da35a
+cp %{_builddir}/IPC-Shareable-0.61/deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-IPC-Shareable/21192cbbbec96769f9ec218d2bcb586f37d1133c
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -91,8 +102,6 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/IPC/Shareable.pm
-/usr/lib/perl5/vendor_perl/5.28.2/IPC/Shareable/SharedMem.pm
 
 %files dev
 %defattr(-,root,root,-)
@@ -101,5 +110,10 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/perl-IPC-Shareable/COPYING
-/usr/share/package-licenses/perl-IPC-Shareable/deblicense_copyright
+/usr/share/package-licenses/perl-IPC-Shareable/075d599585584bb0e4b526f5c40cb6b17e0da35a
+/usr/share/package-licenses/perl-IPC-Shareable/21192cbbbec96769f9ec218d2bcb586f37d1133c
+
+%files perl
+%defattr(-,root,root,-)
+/usr/lib/perl5/vendor_perl/5.30.1/IPC/Shareable.pm
+/usr/lib/perl5/vendor_perl/5.30.1/IPC/Shareable/SharedMem.pm
