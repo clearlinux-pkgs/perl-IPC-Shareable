@@ -4,7 +4,7 @@
 #
 Name     : perl-IPC-Shareable
 Version  : 0.61
-Release  : 12
+Release  : 13
 URL      : https://cpan.metacpan.org/authors/id/M/MS/MSOUTH/IPC-Shareable-0.61.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/M/MS/MSOUTH/IPC-Shareable-0.61.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libi/libipc-shareable-perl/libipc-shareable-perl_0.61-2.debian.tar.xz
@@ -89,7 +89,7 @@ make TEST_VERBOSE=1 test
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-IPC-Shareable
 cp %{_builddir}/IPC-Shareable-0.61/COPYING %{buildroot}/usr/share/package-licenses/perl-IPC-Shareable/075d599585584bb0e4b526f5c40cb6b17e0da35a
-cp %{_builddir}/IPC-Shareable-0.61/deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-IPC-Shareable/21192cbbbec96769f9ec218d2bcb586f37d1133c
+cp %{_builddir}/debian/copyright %{buildroot}/usr/share/package-licenses/perl-IPC-Shareable/21192cbbbec96769f9ec218d2bcb586f37d1133c
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -115,5 +115,5 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.1/IPC/Shareable.pm
-/usr/lib/perl5/vendor_perl/5.30.1/IPC/Shareable/SharedMem.pm
+/usr/lib/perl5/vendor_perl/5.30.2/IPC/Shareable.pm
+/usr/lib/perl5/vendor_perl/5.30.2/IPC/Shareable/SharedMem.pm
