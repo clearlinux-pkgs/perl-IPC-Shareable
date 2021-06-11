@@ -1,2 +1,9 @@
 # This file contains additional runtime requirements that did not get
 # picked up automatically. One name per line, no whitespace.
+perl(Data::Dumper)
+perl(IPC::Semaphore)
+perl(IPC::Shareable)
+perl(IPC::Shareable::SharedMem)
+perl(IPC::SysV)
+perl(Scalar::Util)
+perl(Storable)
