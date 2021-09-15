@@ -1,2 +1,4 @@
-1.04
+1.06
+perl(JSON)
+perl(String::CRC32)
 perl(Test::SharedFork)
