@@ -4,7 +4,7 @@
 #
 Name     : perl-IPC-Shareable
 Version  : 1.06
-Release  : 26
+Release  : 27
 URL      : https://cpan.metacpan.org/authors/id/S/ST/STEVEB/IPC-Shareable-1.06.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/S/ST/STEVEB/IPC-Shareable-1.06.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libi/libipc-shareable-perl/libipc-shareable-perl_0.61-2.debian.tar.xz
@@ -16,8 +16,10 @@ Requires: perl-IPC-Shareable-perl = %{version}-%{release}
 Requires: perl(Data::Dumper)
 Requires: perl(IPC::Semaphore)
 Requires: perl(IPC::SysV)
+Requires: perl(JSON)
 Requires: perl(Scalar::Util)
 Requires: perl(Storable)
+Requires: perl(String::CRC32)
 BuildRequires : buildreq-cpan
 BuildRequires : perl(JSON)
 BuildRequires : perl(String::CRC32)
