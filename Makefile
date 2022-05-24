@@ -1,5 +1,5 @@
 PKG_NAME := perl-IPC-Shareable
-URL = https://cpan.metacpan.org/authors/id/S/ST/STEVEB/IPC-Shareable-1.06.tar.gz
-ARCHIVES = http://http.debian.net/debian/pool/main/libi/libipc-shareable-perl/libipc-shareable-perl_0.61-2.debian.tar.xz deblicense/
+URL = https://cpan.metacpan.org/authors/id/S/ST/STEVEB/IPC-Shareable-1.12.tar.gz
+ARCHIVES = 
 
 include ../common/Makefile.common
