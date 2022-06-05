@@ -4,7 +4,7 @@
 #
 Name     : perl-IPC-Shareable
 Version  : 1.12
-Release  : 28
+Release  : 29
 URL      : https://cpan.metacpan.org/authors/id/S/ST/STEVEB/IPC-Shareable-1.12.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/S/ST/STEVEB/IPC-Shareable-1.12.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libi/libipc-shareable-perl/libipc-shareable-perl_0.61-2.debian.tar.xz
@@ -80,13 +80,6 @@ else
 ./Build
 fi
 
-%check
-export LANG=C.UTF-8
-export http_proxy=http://127.0.0.1:9/
-export https_proxy=http://127.0.0.1:9/
-export no_proxy=localhost,127.0.0.1,0.0.0.0
-make TEST_VERBOSE=1 test
-
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-IPC-Shareable
@@ -117,5 +110,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.34.0/IPC/Shareable.pm
-/usr/lib/perl5/vendor_perl/5.34.0/IPC/Shareable/SharedMem.pm
+/usr/lib/perl5/*
