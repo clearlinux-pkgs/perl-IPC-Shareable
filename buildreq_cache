@@ -1,5 +1,4 @@
-1.12
+1.13
 perl(JSON)
 perl(Mock::Sub)
-perl(String::CRC32)
 perl(Test::SharedFork)
